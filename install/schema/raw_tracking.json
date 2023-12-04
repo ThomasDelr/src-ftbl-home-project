@@ -1,0 +1,76 @@
+[
+  {
+    "name": "timestamp",
+    "mode": "NULLABLE",
+    "type": "TIME"
+  },
+  {
+    "name": "image_corners_projection",
+    "mode": "REPEATED",
+    "type": "FLOAT"
+  },
+  {
+    "name": "period",
+    "mode": "NULLABLE",
+    "type": "INTEGER"
+  },
+  {
+    "name": "frame",
+    "mode": "NULLABLE",
+    "type": "INTEGER"
+  },
+  {
+    "name": "possession",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "fields": [
+      {
+        "name": "trackable_object",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      },
+      {
+        "name": "group",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      }
+    ]
+  },
+  {
+    "name": "data",
+    "mode": "REPEATED",
+    "type": "RECORD",
+    "fields": [
+      {
+        "name": "z",
+        "mode": "NULLABLE",
+        "type": "FLOAT"
+      },
+      {
+        "name": "y",
+        "mode": "NULLABLE",
+        "type": "FLOAT"
+      },
+      {
+        "name": "x",
+        "mode": "NULLABLE",
+        "type": "FLOAT"
+      },
+      {
+        "name": "is_visible",
+        "mode": "NULLABLE",
+        "type": "BOOLEAN"
+      },
+      {
+        "name": "trackable_object",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      },
+      {
+        "name": "track_id",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      }
+    ]
+  }
+]

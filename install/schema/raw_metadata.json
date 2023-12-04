@@ -1,0 +1,511 @@
+[
+  {
+    "name": "pitch_width",
+    "mode": "NULLABLE",
+    "type": "INTEGER"
+  },
+  {
+    "name": "status",
+    "mode": "NULLABLE",
+    "type": "STRING"
+  },
+  {
+    "name": "players",
+    "mode": "REPEATED",
+    "type": "RECORD",
+    "fields": [
+      {
+        "name": "gender",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "birthday",
+        "mode": "NULLABLE",
+        "type": "DATE"
+      },
+      {
+        "name": "short_name",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "first_name",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "id",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      },
+      {
+        "name": "own_goal",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      },
+      {
+        "name": "team_player_id",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      },
+      {
+        "name": "injured",
+        "mode": "NULLABLE",
+        "type": "BOOLEAN"
+      },
+      {
+        "name": "red_card",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      },
+      {
+        "name": "end_time",
+        "mode": "NULLABLE",
+        "type": "TIME"
+      },
+      {
+        "name": "yellow_card",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      },
+      {
+        "name": "number",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      },
+      {
+        "name": "trackable_object",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      },
+      {
+        "name": "team_id",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      },
+      {
+        "name": "start_time",
+        "mode": "NULLABLE",
+        "type": "TIME"
+      },
+      {
+        "name": "goal",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      },
+      {
+        "name": "last_name",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "player_role",
+        "mode": "NULLABLE",
+        "type": "RECORD",
+        "fields": [
+          {
+            "name": "acronym",
+            "mode": "NULLABLE",
+            "type": "STRING"
+          },
+          {
+            "name": "name",
+            "mode": "NULLABLE",
+            "type": "STRING"
+          },
+          {
+            "name": "id",
+            "mode": "NULLABLE",
+            "type": "INTEGER"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "referees",
+    "mode": "REPEATED",
+    "type": "STRING"
+  },
+  {
+    "name": "competition_round",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "fields": [
+      {
+        "name": "potential_overtime",
+        "mode": "NULLABLE",
+        "type": "BOOLEAN"
+      },
+      {
+        "name": "round_number",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      },
+      {
+        "name": "name",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "id",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      }
+    ]
+  },
+  {
+    "name": "stadium",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "fields": [
+      {
+        "name": "capacity",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      },
+      {
+        "name": "city",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "name",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "id",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      }
+    ]
+  },
+  {
+    "name": "away_team_coach",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "fields": [
+      {
+        "name": "first_name",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "last_name",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "id",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      }
+    ]
+  },
+  {
+    "name": "competition_edition",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "fields": [
+      {
+        "name": "name",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "season",
+        "mode": "NULLABLE",
+        "type": "RECORD",
+        "fields": [
+          {
+            "name": "end_year",
+            "mode": "NULLABLE",
+            "type": "INTEGER"
+          },
+          {
+            "name": "start_year",
+            "mode": "NULLABLE",
+            "type": "INTEGER"
+          },
+          {
+            "name": "name",
+            "mode": "NULLABLE",
+            "type": "STRING"
+          },
+          {
+            "name": "id",
+            "mode": "NULLABLE",
+            "type": "INTEGER"
+          }
+        ]
+      },
+      {
+        "name": "competition",
+        "mode": "NULLABLE",
+        "type": "RECORD",
+        "fields": [
+          {
+            "name": "name",
+            "mode": "NULLABLE",
+            "type": "STRING"
+          },
+          {
+            "name": "area",
+            "mode": "NULLABLE",
+            "type": "STRING"
+          },
+          {
+            "name": "id",
+            "mode": "NULLABLE",
+            "type": "INTEGER"
+          }
+        ]
+      },
+      {
+        "name": "id",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      }
+    ]
+  },
+  {
+    "name": "away_team_kit",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "fields": [
+      {
+        "name": "number_color",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "id",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      },
+      {
+        "name": "jersey_color",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "team_id",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      },
+      {
+        "name": "name",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "season",
+        "mode": "NULLABLE",
+        "type": "RECORD",
+        "fields": [
+          {
+            "name": "end_year",
+            "mode": "NULLABLE",
+            "type": "INTEGER"
+          },
+          {
+            "name": "start_year",
+            "mode": "NULLABLE",
+            "type": "INTEGER"
+          },
+          {
+            "name": "name",
+            "mode": "NULLABLE",
+            "type": "STRING"
+          },
+          {
+            "name": "id",
+            "mode": "NULLABLE",
+            "type": "INTEGER"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "home_team_kit",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "fields": [
+      {
+        "name": "number_color",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "id",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      },
+      {
+        "name": "jersey_color",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "team_id",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      },
+      {
+        "name": "name",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "season",
+        "mode": "NULLABLE",
+        "type": "RECORD",
+    
+        "fields": [
+          {
+            "name": "end_year",
+            "mode": "NULLABLE",
+            "type": "INTEGER"
+          },
+          {
+            "name": "start_year",
+            "mode": "NULLABLE",
+            "type": "INTEGER"
+          },
+          {
+            "name": "name",
+            "mode": "NULLABLE",
+            "type": "STRING"
+          },
+          {
+            "name": "id",
+            "mode": "NULLABLE",
+            "type": "INTEGER"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "pitch_length",
+    "mode": "NULLABLE",
+    "type": "INTEGER"
+  },
+  {
+    "name": "away_team",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "fields": [
+      {
+        "name": "acronym",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "short_name",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "name",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "id",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      }
+    ]
+  },
+  {
+    "name": "home_team_side",
+    "mode": "REPEATED",
+    "type": "STRING"
+  },
+  {
+    "name": "home_team",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "fields": [
+      {
+        "name": "acronym",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "short_name",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "name",
+        "mode": "NULLABLE",
+        "type": "STRING"
+    
+      },
+      {
+        "name": "id",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      }
+    ]
+  },
+  {
+    "name": "away_team_score",
+    "mode": "NULLABLE",
+    "type": "INTEGER"
+  },
+  {
+    "name": "id",
+    "mode": "NULLABLE",
+    "type": "INTEGER"
+  },
+  {
+    "name": "home_team_coach",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "fields": [
+      {
+        "name": "first_name",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "last_name",
+        "mode": "NULLABLE",
+        "type": "STRING"
+      },
+      {
+        "name": "id",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      }
+    ]
+  },
+  {
+    "name": "date_time",
+    "mode": "NULLABLE",
+    "type": "TIMESTAMP"
+  },
+  {
+    "name": "ball",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "fields": [
+      {
+        "name": "trackable_object",
+        "mode": "NULLABLE",
+        "type": "INTEGER"
+      }
+    ]
+  },
+  {
+    "name": "home_team_score",
+    "mode": "NULLABLE",
+    "type": "INTEGER"
+  }
+]

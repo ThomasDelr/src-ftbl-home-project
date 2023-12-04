@@ -1,18 +1,22 @@
 import pandas as pd
 import json
-import os
-
 from dotenv import load_dotenv
 
 load_dotenv()
 
-os.environ
+def loading_file(filepath):
+    with open(filepath) as file:
+        json_data = json.load(file)
+    return json_data
 
-with open('src_de_sample_data/10000_metadata.json') as file:
-    json_data = json.load(file)
+filepath = 'src_de_sample_data/10000_metadata.json'
 
-json_data[]
+metadata= loading_file(filepath=filepath)
 
-df = pd.json_normalize(json_data)
+## transform metadata dict to pd df
 
-df = pd.read_json('src_de_sample_data/10000_tracking.txt', lines=True)
+df = pd.json_normalize(metadata, meta=['id', 'home_team_score_','away_team_score', ['stadium', 'id','name','city', 'capacity']])
+df2 = pd.json_normalize(metadata)
+
+for elmt in metadata:
+    print(elmt)
