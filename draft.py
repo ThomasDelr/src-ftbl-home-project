@@ -1,22 +1,36 @@
-import pandas as pd
-import json
 from dotenv import load_dotenv
-
+from app.src.services import gcp
+import os
 load_dotenv()
 
-def loading_file(filepath):
-    with open(filepath) as file:
-        json_data = json.load(file)
-    return json_data
+project_id = 'dev-'+ os.environ['GCP_PROJECT_ID']
+bucket_name = os.environ['BUCKET_NAME']
+dataset_name = os.environ['DATASET_NAME']
 
-filepath = 'src_de_sample_data/10000_metadata.json'
+gcp.send_file_to_gcs(local_file_path='src_de_sample_data/10000_tracking.txt',
+                     bucket_name=bucket_name,
+                     remote_file_path='tracking/10000_tracking.txt'
+                      )
 
-metadata= loading_file(filepath=filepath)
+gcp.send_file_to_gcs(local_file_path='src_de_sample_data/10000_metadata.json',
+                     bucket_name=bucket_name,
+                     remote_file_path='metadata/10000_metadata.json'
+                      )
 
-## transform metadata dict to pd df
+gcp.gcs_to_bq(project_id=project_id,
+              gcs_bucket_name=bucket_name,
+              gcs_file_path='metadata/10000_metadata.json',
+              bq_dataset_name=f'{dataset_name}_staging',
+              bq_table_name='metadata',
+              type='json')
 
-df = pd.json_normalize(metadata, meta=['id', 'home_team_score_','away_team_score', ['stadium', 'id','name','city', 'capacity']])
-df2 = pd.json_normalize(metadata)
+gcp.gcs_to_bq(project_id=project_id,
+              gcs_bucket_name=bucket_name,
+              gcs_file_path='tracking/10000_tracking.txt',
+              bq_dataset_name=f'{dataset_name}_staging',
+              bq_table_name='tracking',
+              type='nljson')
 
-for elmt in metadata:
-    print(elmt)
+tracking = gcp.job_to_bq(query=f'select * from {project_id}.{dataset_name}_staging.tracking')
+
+df = tracking.to_dataframe()
