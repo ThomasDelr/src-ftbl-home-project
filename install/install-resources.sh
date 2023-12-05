@@ -28,6 +28,8 @@ export TF_VAR_google_project_id="$ENV-$GCP_PROJECT_ID"
 export TF_VAR_google_bucket_name="$BUCKET_NAME"
 export TF_VAR_google_bucket_name_processed="$BUCKET_NAME-processed"
 
+echo $BUCKET_NAME
+
 cd ./install/modules
 terraform init
 terraform apply -auto-approve

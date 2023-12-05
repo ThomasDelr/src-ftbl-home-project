@@ -21,15 +21,13 @@ gcp.gcs_to_bq(project_id=project_id,
               gcs_bucket_name=bucket_name,
               gcs_file_path='metadata/10000_metadata.json',
               bq_dataset_name=f'{dataset_name}_staging',
-              bq_table_name='metadata',
-              type='json')
+              bq_table_name='metadata')
 
 gcp.gcs_to_bq(project_id=project_id,
               gcs_bucket_name=bucket_name,
               gcs_file_path='tracking/10000_tracking.txt',
               bq_dataset_name=f'{dataset_name}_staging',
-              bq_table_name='tracking',
-              type='nljson')
+              bq_table_name='tracking')
 
 tracking = gcp.job_to_bq(query=f'select * from {project_id}.{dataset_name}_staging.tracking')
 

@@ -3,7 +3,7 @@ from google.cloud import bigquery
 import os
 import json
 
-def gcs_to_bq(project_id, gcs_bucket_name, gcs_file_path, bq_dataset_name, bq_table_name,type):
+def gcs_to_bq(project_id, gcs_bucket_name, gcs_file_path, bq_dataset_name, bq_table_name):
     # Set up the BigQuery client
     client = bigquery.Client(project=project_id)
 
@@ -58,3 +58,20 @@ def job_to_bq(query):
     query_job.result()
 
     return query_job.result()
+
+
+def copy_file(source_bucket_name, source_blob_name, destination_bucket_name, destination_blob_name):
+    # Initialize the Google Cloud Storage client
+    storage_client = storage.Client()
+    # Get source and destination bucket references
+    source_bucket = storage_client.bucket(source_bucket_name)
+    destination_bucket = storage_client.bucket(destination_bucket_name)
+    # Get the source blob
+    source_blob = source_bucket.blob(source_blob_name)
+    # Create a new blob in the destination bucket
+    destination_blob = destination_bucket.blob(destination_blob_name)
+    # Copy the file from the source to the destination
+    destination_blob.upload_from_blob(source_blob)
+
+    print(f"File {source_blob_name} copied from {source_bucket_name} to {destination_bucket_name}/{destination_blob_name}")
+    return destination_blob

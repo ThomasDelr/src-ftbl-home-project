@@ -6,8 +6,8 @@ provider "google" {
 
 module "resources" {
     source = "./resources"
-    google_bucket_name = var.google_bucket_name
-    google_bucket_name_processed = var.google_bucket_name_processed
+    google_bucket_name = "src-ftbl-data"
+    google_bucket_name_processed = "src-ftbl-data-processed"
     google_project_id = "dev-src-ftbl-home-project"
 }
 
@@ -18,6 +18,11 @@ module "src_ftbl_raw" {
 
 module "src_ftbl_staging" {
     source = "./src_ftbl_staging"
+    google_project_id = "dev-src-ftbl-home-project"
+}
+
+module "src_ftbl" {
+    source = "./src_ftbl"
     google_project_id = "dev-src-ftbl-home-project"
 }
 
