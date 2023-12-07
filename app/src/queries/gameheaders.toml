@@ -1,4 +1,9 @@
-INSERT INTO src-ftbl.game_summary
+
+[[idQuery]]
+
+IdStatement = " loading game metadata to the game_summary for game {game_id} table"
+query = """
+INSERT INTO src_ftbl.game_summary
 
 SELECT
   m.id as game_id,
@@ -31,7 +36,10 @@ SELECT
   case when away_team_score > home_team_score then 'win'
        when away_team_score < home_team_score then 'lose'
        else 'draw' end as away_result,
-  current_datetime () as tec_created_at
+       '{technical_id}' as tec_id,
+       TIMESTAMP('{technical_date}') as created_at
 FROM
   `dev-src-ftbl-home-project.src_ftbl_staging.metadata` AS m
+  where m.id = {game_id}
 ;
+"""

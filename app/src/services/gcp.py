@@ -2,6 +2,7 @@ from google.cloud import storage
 from google.cloud import bigquery
 import os
 import json
+import toml
 
 def gcs_to_bq(project_id, gcs_bucket_name, gcs_file_path, bq_dataset_name, bq_table_name):
     # Set up the BigQuery client
@@ -48,7 +49,12 @@ def send_file_to_gcs(local_file_path, bucket_name, remote_file_path):
 
     return f'file {local_file_path} sent to gcs as {remote_file_path}'
 
-def job_to_bq(query):
+def loading_data(query_file, id, technical_id, technical_date):
+    with open(query_file, "r") as toml_file:
+        queries = toml.load(toml_file)
+
+    query = queries["idQuery"][0]['query']
+    query = query.format(game_id=id, technical_id=technical_id,technical_date=technical_date)
     client = bigquery.Client()
     # Construct the query job
     job_config = bigquery.QueryJobConfig()
@@ -58,7 +64,6 @@ def job_to_bq(query):
     query_job.result()
 
     return query_job.result()
-
 
 def copy_file(source_bucket_name, source_blob_name, destination_bucket_name, destination_blob_name):
     # Initialize the Google Cloud Storage client

@@ -1,0 +1,24 @@
+
+[[idQuery]]
+
+IdStatement = "loading transformed data for game {game_id} to tracking table"
+query = """
+insert into src_ftbl.tracking
+
+select {game_id} as game_id,
+        period,
+        timestamp,
+        frame,
+        possession.trackable_object as possession_trackable_object,
+        possession.group as possession_group,
+        d.z,
+        d.y,
+        d.x,
+        is_visible,
+        trackable_object,
+        track_id,
+        '{technical_id}' as tec_id,
+        TIMESTAMP('{technical_date}') as created_at
+from src_ftbl_staging.tracking,
+unnest(data) as d
+"""
