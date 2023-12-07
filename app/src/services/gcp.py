@@ -80,3 +80,11 @@ def copy_file(source_bucket_name, source_blob_name, destination_bucket_name, des
 
     print(f"File {source_blob_name} copied from {source_bucket_name} to {destination_bucket_name}/{destination_blob_name}")
     return destination_blob
+
+def job_to_bq(query):
+    client = bigquery.Client()
+    job_config = bigquery.QueryJobConfig()
+    job_config.use_legacy_sql = False  # Use standard SQL
+    query_job = client.query(query, job_config=job_config)
+    result = query_job.result()
+    return result.to_dataframe()

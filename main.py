@@ -47,6 +47,8 @@ def load_to_bq():
                   bq_table_name=table)
     return(f'file {remote_file_path} loaded to bq for the game {game_id}')
 
+
+
 @app.route('/transformed_metadata_table')
 def transformed_data():
     ### add game id that we are pushing
