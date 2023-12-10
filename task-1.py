@@ -1,4 +1,4 @@
-from pyspark.sql import SparkSession, DataFrameReader
+from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql.window import Window
 
@@ -12,21 +12,31 @@ df = spark.read \
   .format("bigquery") \
   .load("dev-src-ftbl-home-project.src_ftbl.tracking")
 
-df = df.withColumn("timestamp", F.to_timestamp("timestamp"))
-# Define a window specification to order the data by timestamp within each group
-window_spec = Window().partitionBy("trackable_object").orderBy("timestamp")
+def calculate_distance_spark(df, game_id, team_col, player_col, timestamp_col='timestamp', x_col='x', y_col='y'):
+    # Convert timestamp column to timestamp type
+    df = df.withColumn(timestamp_col, F.col(timestamp_col).cast('timestamp'))
 
-# Calculate the Euclidean distance
-df = df.withColumn("lag_x", F.lag("x").over(window_spec)) \
-       .withColumn("lag_y", F.lag("y").over(window_spec))
+    # Sort the DataFrame by player_id, timestamp, and team_id
+    window_spec = Window().partitionBy(game_id, team_col, player_col).orderBy(timestamp_col)
+    df = df.withColumn('dx', F.col(x_col) - F.lag(F.col(x_col)).over(window_spec)).fillna(0)
+    df = df.withColumn('dy', F.col(y_col) - F.lag(F.col(y_col)).over(window_spec)).fillna(0)
 
-df = df.withColumn("distance", F.sqrt((df["x"] - df["lag_x"])**2 + (df["y"] - df["lag_y"])**2))
+    # Calculate distance using Pythagorean theorem
+    df = df.withColumn('distance', F.sqrt(F.col('dx')**2 + F.col('dy')**2))
 
-# Calculate the time difference
-df = df.withColumn("time_diff", (F.unix_timestamp("timestamp") - F.unix_timestamp("lag_timestamp")))
+    # Calculate time difference in seconds with microseconds
+    df = df.withColumn('time_diff', (F.col(timestamp_col) - F.lag(F.col(timestamp_col)).over(window_spec)).cast('double')).fillna(0)
 
-# Calculate the speed (distance / time_diff)
-df = df.withColumn("speed", df["distance"] / df["time_diff"])
+    # Calculate speed (sqrt(dx^2 + dy^2) / time_diff) and convert to m/s
+    df = df.withColumn('speed', (F.sqrt(F.col('dx')**2 + F.col('dy')**2) / F.col('time_diff')).cast('double'))
 
-# Show the resulting DataFrame
-df.select("timestamp", "x", "y", "distance", "speed").show()
+    # Convert speed to km/h
+    df = df.withColumn('speed', F.col('speed') * 3.6)
+
+    # Calculate acceleration (change in speed / change in time)
+    df = df.withColumn('acceleration', (F.col('speed') - F.lag(F.col('speed')).over(window_spec)) / F.col('time_diff'))
+
+    # Drop intermediate columns
+    df = df.drop('dx', 'dy', 'time_diff')
+
+    return df

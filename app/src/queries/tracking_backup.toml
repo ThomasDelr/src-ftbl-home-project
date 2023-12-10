@@ -3,7 +3,7 @@
 
 IdStatement = "loading transformed data for game {game_id} to tracking table"
 query = """
-insert into src_ftbl.tracking
+insert into src_ftbl_staging.temp_tracking
 WITH
   teams AS (
   SELECT
@@ -13,7 +13,7 @@ WITH
     home_team.short_name AS team_short_name,
     m.id AS game_id
   FROM
-    src_ftbl_staging.metadata
+    src_ftbl_staging.metadata as m
   WHERE m.id = {game_id}
   UNION ALL
   SELECT
@@ -23,7 +23,7 @@ WITH
     away_team.short_name AS team_short_name,
     m.id AS game_id
   FROM
-    src_ftbl_staging.metadata
+    src_ftbl_staging.metadata as m
   WHERE m.id = {game_id}
   ),
   players AS (
@@ -40,7 +40,7 @@ WITH
   FROM
     src_ftbl_staging.metadata AS m,
     UNNEST(players) AS p
-  WHERE m.id = {game_id]
+  WHERE m.id = {game_id}
   ),
   tracking AS (
   SELECT
@@ -59,7 +59,7 @@ WITH
     trackable_object,
     track_id,
     '{technical_id}' AS tec_id,
-    TIMESTAMP(current_date) AS created_at
+    TIMESTAMP('{technical_date}') AS created_at
   FROM
     src_ftbl_staging.tracking,
     UNNEST(DATA) AS d )

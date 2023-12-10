@@ -3,7 +3,7 @@
 
 IdStatement = "loading data to the players_game_detail for game {game_id} table"
 query = """
-INSERT into src_ftbl.players_game_summary
+INSERT into src_ftbl.game_players_summary
 SELECT m.id as game_id,
        date_time,
        m.status,

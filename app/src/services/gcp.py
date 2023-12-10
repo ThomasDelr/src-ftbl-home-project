@@ -10,7 +10,7 @@ def gcs_to_bq(project_id, gcs_bucket_name, gcs_file_path, bq_dataset_name, bq_ta
 
     # Create a load job configuration
     load_job_config = bigquery.LoadJobConfig()
-    load_job_config.write_disposition = bigquery.WriteDisposition.WRITE_TRUNCATE
+    load_job_config.write_disposition = bigquery.WriteDisposition.WRITE_APPEND
     load_job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 
     #load_job_config.source_format =bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
@@ -49,7 +49,7 @@ def send_file_to_gcs(local_file_path, bucket_name, remote_file_path):
 
     return f'file {local_file_path} sent to gcs as {remote_file_path}'
 
-def loading_data(query_file, id, technical_id, technical_date):
+def loading_data(query_file,id, technical_id, technical_date):
     with open(query_file, "r") as toml_file:
         queries = toml.load(toml_file)
 
@@ -75,10 +75,14 @@ def copy_file(source_bucket_name, source_blob_name, destination_bucket_name, des
     source_blob = source_bucket.blob(source_blob_name)
     # Create a new blob in the destination bucket
     destination_blob = destination_bucket.blob(destination_blob_name)
-    # Copy the file from the source to the destination
-    destination_blob.upload_from_blob(source_blob)
+    # copy to new destination
+    new_blob = source_bucket.copy_blob(
+        source_blob, destination_bucket, destination_blob_name)
+    # delete in old destination
+    source_blob.delete()
 
     print(f"File {source_blob_name} copied from {source_bucket_name} to {destination_bucket_name}/{destination_blob_name}")
+
     return destination_blob
 
 def job_to_bq(query):
@@ -88,3 +92,25 @@ def job_to_bq(query):
     query_job = client.query(query, job_config=job_config)
     result = query_job.result()
     return result.to_dataframe()
+
+def df_to_bq(df,project_id, dataset_id, table_id):
+    client = bigquery.Client(project=project_id)
+    table_id = f'{dataset_id}.{table_id}'
+    load_job_config = bigquery.LoadJobConfig()
+    load_job_config.write_disposition = bigquery.WriteDisposition.WRITE_APPEND
+    job = client.load_table_from_dataframe(df, table_id, job_config=load_job_config)
+    job.result()
+    table = client.get_table(table_id)
+    return print(f"Loaded {table.num_rows} rows and {len(table.schema)} columns to {table_id}")
+
+def object_to_gcs(data, bucket_name,file_name):
+    """
+      :type file_name: object
+    """
+    client=storage.Client()
+    csv_content = data.to_csv(index=False, encoding='UTF-8', sep=',',header=True, mode='a')
+    bucket = client.get_bucket(bucket_name)
+    blob = bucket.blob(file_name)
+    blob.upload_from_string(csv_content, content_type='text/csv')
+
+    print(f'Object saved to gs://{bucket_name}/{file_name}')

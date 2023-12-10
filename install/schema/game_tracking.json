@@ -1,0 +1,104 @@
+[
+  {
+    "name": "period",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "1 : first half, 2 : second half"
+  },
+  {
+    "name": "timestamp",
+    "mode": "",
+    "type": "STRING",
+    "description": "event timestamp"
+  },
+  {
+    "name": "game_hour",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "event hour in the game"
+  },
+  {
+    "name": "game_minutes",
+    "mode": "",
+    "type": "INTEGER",
+    "description":"event minutes in the game"
+  },
+  {
+    "name": "game_seconds",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "event second in the game"
+  },
+  {
+    "name": "game_microseconds",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "event microsecond"
+  },
+  {
+    "name": "frame",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "camera image number"
+  },
+  {
+    "name": "possession_trackable_object",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "object id in ball possession "
+  },
+  {
+    "name": "possession_group",
+    "mode": "",
+    "type": "STRING",
+    "description": "team possession"
+  },
+  {
+    "name": "z",
+    "mode": "",
+    "type": "FLOAT",
+    "description": "coordinates on z axis"
+  },
+  {
+    "name": "y",
+    "mode": "",
+    "type": "FLOAT",
+    "description": "coordinates on y axis, in meter"
+  },
+  {
+    "name": "x",
+    "mode": "",
+    "type": "FLOAT",
+    "description": "coordinates on x axis, in meter"
+  },
+  {
+    "name": "is_visible",
+    "mode": "",
+    "type": "BOOLEAN",
+    "description": "is visible on the frame"
+  },
+  {
+    "name": "trackable_object",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "object tracked id"
+  },
+  {
+    "name": "track_id",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "object tracked id"
+  },
+  {
+    "name": "tec_id",
+    "mode": "",
+    "type": "STRING",
+    "description": "technical creation id"
+  },
+  {
+    "name": "created_at",
+    "mode": "",
+    "type": "TIMESTAMP",
+    "description": "technical creation date"
+  }
+]

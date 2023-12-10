@@ -26,6 +26,11 @@ module "src_ftbl" {
     google_project_id = "dev-src-ftbl-home-project"
 }
 
+module "monitoring" {
+    source = "./monitoring"
+    google_project_id = "dev-src-ftbl-home-project"
+}
+
 terraform {
   backend "gcs" {
     bucket  = "src-ftbl-tf"

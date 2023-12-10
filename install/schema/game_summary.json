@@ -1,0 +1,170 @@
+[
+  {
+    "name": "game_id",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "game id"
+  },
+  {
+    "name": "date_time",
+    "mode": "",
+    "type": "TIMESTAMP",
+    "description": "game date time"
+  },
+  {
+    "name": "status",
+    "mode": "",
+    "type": "STRING",
+    "description": "game status"
+  },
+  {
+    "name": "home_team_name",
+    "mode": "",
+    "type": "STRING",
+    "description": "home team name"
+  },
+  {
+    "name": "home_team_id",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "home team id"
+  },
+  {
+    "name": "home_team_score",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "home team score"
+  },
+  {
+    "name": "away_team_score",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "away team score"
+  },
+  {
+    "name": "away_team_id",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "away team id"
+  },
+  {
+    "name": "away_team_name",
+    "mode": "",
+    "type": "STRING",
+    "description": "away team name"
+  },
+  {
+    "name": "competition_round_id",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "id round gameweek"
+  },
+  {
+    "name": "competition_round_number",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "round gameweek"
+  },
+  {
+    "name": "competition_round_name",
+    "mode": "",
+    "type": "STRING",
+    "description": "round gameweek"
+  },
+  {
+    "name": "potential_overtime",
+    "mode": "",
+    "type": "BOOLEAN",
+    "description": "is an overtime posbible"
+  },
+  {
+    "name": "competition_name",
+    "mode": "",
+    "type": "STRING",
+    "description": "competition name"
+  },
+  {
+    "name": "competition_id",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "competition id"
+  },
+  {
+    "name": "season_name",
+    "mode": "",
+    "type": "STRING",
+    "description": "season name"
+  },
+  {
+    "name": "season_id",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "season id"
+  },
+  {
+    "name": "stadium_id",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "game stadium id"
+  },
+  {
+    "name": "stadium_name",
+    "mode": "",
+    "type": "STRING",
+    "description": "game stadium name"
+  },
+  {
+    "name": "pitch_width",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "pitch width"
+  },
+  {
+    "name": "pitch_length",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "pitch length"
+  },
+  {
+    "name": "ball_id",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "ball trackable object id"
+  },
+  {
+    "name": "home_team_side_1st_half",
+    "mode": "",
+    "type": "STRING",
+    "description": null
+  },
+  {
+    "name": "home_team_side_2nd_half",
+    "mode": "",
+    "type": "STRING",
+    "description": null
+  },
+  {
+    "name": "home_result",
+    "mode": "",
+    "type": "STRING",
+    "description": "game result for the home team"
+  },
+  {
+    "name": "away_result",
+    "mode": "",
+    "type": "STRING",
+    "description": "game result for the away team"
+  },
+  {
+    "name": "tec_id",
+    "mode": "",
+    "type": "STRING",
+    "description": "technical creation id"
+  },
+  {
+    "name": "created_at",
+    "mode": "",
+    "type": "TIMESTAMP",
+    "description": "technical creation date"
+  }
+]
