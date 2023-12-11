@@ -23,7 +23,7 @@ resource "google_bigquery_table" "src_ftbl_game_summary" {
     type = "DAY"
     require_partition_filter = true
   }
-  clustering = ['game_id', 'home_team_id', 'away_team_id']
+  clustering = ["game_id", "home_team_id", "away_team_id"]
 }
 
 resource "google_bigquery_table" "src_ftbl_game_players_summary" {
@@ -41,7 +41,7 @@ resource "google_bigquery_table" "src_ftbl_game_players_summary" {
     type = "DAY"
     require_partition_filter = true
   }
-  clustering = ['game_id', 'team_id', 'player_id']
+  clustering = ["game_id", "team_id", "player_id"]
 }
 
 resource "google_bigquery_table" "src_ftbl_game_tracking" {
@@ -59,5 +59,5 @@ resource "google_bigquery_table" "src_ftbl_game_tracking" {
     type = "DAY"
     require_partition_filter = true
   }
-  clustering = ['game_id', 'team_id', 'trackable_object']
+  clustering = ["game_id", "team_id", "trackable_object"]
 }

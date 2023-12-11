@@ -1,19 +1,48 @@
-from dotenv import load_dotenv
-from app.src.services import gcp,util
-import os
 import pandas as pd
-load_dotenv()
+from scipy.spatial.distance import pdist, squareform,euclidean
 
-project_id = 'dev-'+ os.environ['GCP_PROJECT_ID']
-bucket_name = os.environ['BUCKET_NAME']
-dataset_name = os.environ['DATASET_NAME']
+import math
+from app.src.services import gcp
+# Assuming you have a DataFrame c
+# alled df with columns: timestamp, player, x, y
 
-query = """
-select * from src_ftbl_staging.temp_metadata
-"""
+# Sample DataFrame creation
+data = gcp.job_to_bq('select * from src_ftbl.game_tracking')
+df = pd.DataFrame(data)
 
-df = gcp.job_to_bq(query)
-df2= util.calculate_distance(df=df, game_id='game_id', team_col='team_id',player_col='trackable_object')
+# Function to calculate distance between players
+def calculate_distance(df):
+    # Pivot the DataFrame to have players as columns
+    pivot_df = df.pivot(index=['timestamp', 'trackable_object','frame'], columns='track_id', values=['x', 'y']).fillna(0)
 
+    # Extract x, y coordinates for each player
+    player_x = pivot_df['x'].values
+    player_y = pivot_df['y'].values
 
-df['distance'].max()
+    # Combine x, y coordinates into a flat array
+    player_coordinates = list(zip(player_x, player_y))
+
+    # Calculate pairwise Euclidean distances
+    distances = pdist(player_coordinates[0], metric='euclidean')
+    distances = math.dist(player_coordinates,)
+    # Convert distances to a square matrix
+    distance_matrix = squareform(distances)
+
+    # Create a DataFrame from the distance matrix
+    distance_df = pd.DataFrame(distance_matrix, columns=pivot_df.index)
+
+    return distance_df
+
+# Call the function and display the result
+distance_df = calculate_distance(df)
+print(distance_df)
+
+group = df[df.trackable_object!=55].groupby(["trackable_object", 'timestamp'])[["x", "y"]]
+
+def player_dist(player_a, player_b):
+    return [euclidean(player_a.iloc[i], player_b.iloc[i])
+            for i in range(len(player_a))]
+
+ball = df[df.trackable_object==55][["x", "y"]]
+
+harden_dist = group.apply(player_dist, player_b=(ball))

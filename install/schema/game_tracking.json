@@ -1,5 +1,11 @@
 [
   {
+    "name": "game_id",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "game id"
+  },
+  {
     "name": "period",
     "mode": "",
     "type": "INTEGER",

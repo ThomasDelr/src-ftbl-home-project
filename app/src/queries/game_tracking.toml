@@ -4,6 +4,7 @@
 IdStatement = "loading transformed data for game to tracking table"
 
 query = """
+    INSERT into src_ftbl.game_tracking
     SELECT
     {game_id} as game_id,
     period,

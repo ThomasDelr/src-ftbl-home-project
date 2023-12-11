@@ -32,4 +32,5 @@ echo $BUCKET_NAME
 
 cd ./install/modules
 terraform init
-terraform apply -auto-approve
+terraform plan
+#terraform apply -auto-approve
