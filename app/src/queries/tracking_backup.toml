@@ -1,0 +1,90 @@
+
+[[idQuery]]
+
+IdStatement = "loading transformed data for game {game_id} to tracking table"
+query = """
+insert into src_ftbl_staging.temp_tracking
+WITH
+  teams AS (
+  SELECT
+    home_team.id AS team_id,
+    home_team.acronym AS team_acronym,
+    home_team.name AS team_name,
+    home_team.short_name AS team_short_name,
+    m.id AS game_id
+  FROM
+    src_ftbl_staging.metadata as m
+  WHERE m.id = {game_id}
+  UNION ALL
+  SELECT
+    away_team.id AS team_id,
+    away_team.acronym AS team_acronym,
+    away_team.name AS team_name,
+    away_team.short_name AS team_short_name,
+    m.id AS game_id
+  FROM
+    src_ftbl_staging.metadata as m
+  WHERE m.id = {game_id}
+  ),
+  players AS (
+  SELECT
+    p.trackable_object AS player_trackable_object,
+    p.short_name AS player_short_name,
+    p.birthday AS player_birthday,
+    p.first_name AS player_first_name,
+    p.last_name AS player_last_name,
+    p.id AS player_id,
+    p.team_id,
+    player_role.acronym AS role_acronym,
+    m.id AS game_id,
+  FROM
+    src_ftbl_staging.metadata AS m,
+    UNNEST(players) AS p
+  WHERE m.id = {game_id}
+  ),
+  tracking AS (
+  SELECT
+    period,
+    cast(FORMAT_TIME("%H:%M:%E*S",timestamp) as string) as timestamp,
+    EXTRACT(hour from timestamp) game_hour,
+    EXTRACT(minute from timestamp) game_minutes,
+    EXTRACT(second from timestamp) game_seconds,
+    frame,
+    possession.trackable_object AS possession_trackable_object,
+    possession.group AS possession_group,
+    d.z,
+    d.y,
+    d.x,
+    is_visible,
+    trackable_object,
+    track_id,
+    '{technical_id}' AS tec_id,
+    TIMESTAMP('{technical_date}') AS created_at
+  FROM
+    src_ftbl_staging.tracking,
+    UNNEST(DATA) AS d )
+SELECT
+  t.team_id,
+  t.team_acronym,
+  t.team_name,
+  t.team_short_name,
+  t.game_id,
+  p.player_first_name,
+  p.player_last_name,
+  p.player_short_name,
+  p.player_birthday,
+  p.player_id,
+  p.role_acronym,
+  tracking.*
+FROM
+  teams AS t
+LEFT JOIN
+  players AS p
+ON
+  t.team_id = p.team_id
+  AND p.game_id = t.game_id
+LEFT JOIN
+  tracking AS tracking
+ON
+  tracking.trackable_object = p.player_trackable_object
+"""

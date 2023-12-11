@@ -1,0 +1,31 @@
+
+[[idQuery]]
+
+IdStatement = "loading transformed data for game to tracking table"
+
+query = """
+    INSERT into src_ftbl.game_tracking
+    SELECT
+    {game_id} as game_id,
+    period,
+    cast(FORMAT_TIME("%H:%M:%E*S",timestamp) as string) as timestamp,
+    EXTRACT(hour from timestamp) game_hour,
+    EXTRACT(minute from timestamp) game_minutes,
+    EXTRACT(second from timestamp) game_seconds,
+    EXTRACT(microsecond from timestamp) game_microseconds,
+    frame,
+    possession.trackable_object AS possession_trackable_object,
+    possession.group AS possession_group,
+    d.z,
+    d.y,
+    d.x,
+    is_visible,
+    trackable_object,
+    track_id,
+    '{technical_id}' AS tec_id,
+    TIMESTAMP('{technical_date}') AS created_at
+  FROM
+    src_ftbl_staging.tracking,
+    UNNEST(DATA) AS d
+
+"""

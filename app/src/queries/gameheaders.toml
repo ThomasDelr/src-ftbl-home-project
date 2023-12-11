@@ -1,0 +1,45 @@
+
+[[idQuery]]
+
+IdStatement = " loading game metadata to the game_summary for game {game_id} table"
+query = """
+INSERT INTO src_ftbl.game_summary
+
+SELECT
+  m.id as game_id,
+  m.date_time,
+  status,
+  home_team.name as home_team_name,
+  home_team.id as home_team_id,
+  home_team_score,
+  away_team_score,
+  away_team.id as away_team_id,
+  away_team.name as away_team_name,
+  competition_round.id as competition_round_id,
+  competition_round.round_number as competition_round_number,
+  competition_round.name as competition_round_name,
+  competition_round.potential_overtime,
+  competition_edition.name as competition_name,
+  competition_edition.id as competition_id,
+  competition_edition.season.name as season_name,
+  competition_edition.season.id as season_id,
+  stadium.id as stadium_id,
+  stadium.name as stadium_name,
+  pitch_width,
+  pitch_length,
+  ball.trackable_object as ball_id,
+  home_team_side[offset(0)] as home_team_side_1st_half,
+  home_team_side[offset(1)] as home_team_side_2nd_half,
+  case when home_team_score > away_team_score then 'win'
+       when home_team_score < away_team_score then 'lose'
+       else 'draw' end as home_result,
+  case when away_team_score > home_team_score then 'win'
+       when away_team_score < home_team_score then 'lose'
+       else 'draw' end as away_result,
+       '{technical_id}' as tec_id,
+       TIMESTAMP('{technical_date}') as created_at
+FROM
+  `dev-src-ftbl-home-project.src_ftbl_staging.metadata` AS m
+  where m.id = {game_id}
+;
+"""

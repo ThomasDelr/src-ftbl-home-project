@@ -1,0 +1,182 @@
+[
+  {
+    "name": "game_id",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "game id"
+  },
+  {
+    "name": "date_time",
+    "mode": "",
+    "type": "TIMESTAMP",
+    "description": "game datetime"
+  },
+  {
+    "name": "status",
+    "mode": "",
+    "type": "STRING",
+    "description": "game status"
+  },
+  {
+    "name": "round_number",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "round "
+  },
+  {
+    "name": "season_name",
+    "mode": "",
+    "type": "STRING",
+    "description": "season name"
+  },
+  {
+    "name": "season_id",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "season id"
+  },
+  {
+    "name": "competition_name",
+    "mode": "",
+    "type": "STRING",
+    "description": "competition name"
+  },
+  {
+    "name": "competition_id",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "competition id"
+  },
+  {
+    "name": "competition_area",
+    "mode": "",
+    "type": "STRING",
+    "description": "competition country"
+  },
+  {
+    "name": "short_name",
+    "mode": "",
+    "type": "STRING",
+    "description": "player short name"
+  },
+  {
+    "name": "gender",
+    "mode": "",
+    "type": "STRING",
+    "description": "player gender"
+  },
+  {
+    "name": "birthday",
+    "mode": "",
+    "type": "DATE",
+    "description": "player birthday"
+  },
+  {
+    "name": "first_name",
+    "mode": "",
+    "type": "STRING",
+    "description": "player first name"
+  },
+  {
+    "name": "last_name",
+    "mode": "",
+    "type": "STRING",
+    "description": "player last name"
+  },
+  {
+    "name": "player_id",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "player id"
+  },
+  {
+    "name": "trackable_object",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "player trackable id"
+  },
+  {
+    "name": "role_acronym",
+    "mode": "",
+    "type": "STRING",
+    "description": "player role acronym"
+  },
+  {
+    "name": "role_name",
+    "mode": "",
+    "type": "STRING",
+    "description": "player role name"
+  },
+  {
+    "name": "role_id",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "player role id"
+  },
+  {
+    "name": "number",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "player jersey number"
+  },
+  {
+    "name": "team_id",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "player team id"
+  },
+  {
+    "name": "start_time",
+    "mode": "",
+    "type": "TIME",
+    "description": "player game starting tome"
+  },
+  {
+    "name": "end_time",
+    "mode": "",
+    "type": "TIME",
+    "description": "player game ending time"
+  },
+  {
+    "name": "goal",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "number of goal"
+  },
+  {
+    "name": "red_card",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "number of red card"
+  },
+  {
+    "name": "injured",
+    "mode": "",
+    "type": "BOOLEAN",
+    "description": "is injured"
+  },
+  {
+    "name": "own_goal",
+    "mode": "",
+    "type": "INTEGER",
+    "description": "number of own goal"
+  },
+  {
+    "name": "team_player_id",
+    "mode": "",
+    "type": "INTEGER",
+    "description": null
+  },
+  {
+    "name": "tec_id",
+    "mode": "",
+    "type": "STRING",
+    "description": "technical creation id"
+  },
+  {
+    "name": "tec_created_at",
+    "mode": "",
+    "type": "TIMESTAMP",
+    "description": "technical creation date"
+  }
+]

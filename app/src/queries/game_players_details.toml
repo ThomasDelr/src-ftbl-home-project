@@ -1,0 +1,40 @@
+
+[[idQuery]]
+
+IdStatement = "loading data to the players_game_detail for game {game_id} table"
+query = """
+INSERT into src_ftbl.game_players_summary
+SELECT m.id as game_id,
+       date_time,
+       m.status,
+       competition_round.round_number,
+       competition_edition.season.name season_name,
+       competition_edition.season.id season_id,
+       competition_edition.competition.name competition_name,
+       competition_edition.competition.id competition_id,
+       competition_edition.competition.area competition_area,
+       p.short_name,
+       p.gender,
+       p.birthday,
+       p.first_name,
+       p.last_name,
+       p.id as player_id,
+       p.trackable_object,
+       p.player_role.acronym role_acronym,
+       p.player_role.name as role_name,
+       p.player_role.id role_id,
+       p.number,
+       p.team_id,
+       p.start_time,
+       p.end_time,
+       p.goal,
+       p.red_card,
+       p.injured,
+       p.own_goal,
+       p.team_player_id,
+       '{technical_id}' as tec_id,
+       TIMESTAMP('{technical_date}') as tec_created_at
+FROM src_ftbl_staging.metadata m ,
+unnest(players) as p
+  where m.id = {game_id}
+"""

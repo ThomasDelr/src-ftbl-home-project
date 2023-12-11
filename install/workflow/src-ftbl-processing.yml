@@ -1,0 +1,24 @@
+- extracting_file:
+    call: http.get
+    args:
+      url: https://prod-playground-xg7ngi6joa-ew.a.run.app/send_file_to_gcs/<path:local_file_path>
+- load_data_to_staging_table:
+    call: http.get
+    args:
+      url: https://prod-playground-xg7ngi6joa-ew.a.run.app/loading_into_bq
+- transform_data:
+    call: http.get
+    args:
+      url: https://prod-playground-xg7ngi6joa-ew.a.run.app/transformed_tables
+- storing_raw_data:
+    call: http.get
+    args:
+      url: https://prod-playground-xg7ngi6joa-ew.a.run.app/creating_backup
+- cleaning_staging:
+    call: http.get
+    args:
+      url: https://prod-playground-xg7ngi6joa-ew.a.run.app/truncating_staging
+- moving_file:
+    call: http.get
+    args:
+      url: https://prod-playground-xg7ngi6joa-ew.a.run.app/moving_raw_files
