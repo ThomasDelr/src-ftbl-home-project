@@ -23,6 +23,12 @@ Our data system involved these followings tools :
 - Terraform, create and manage the app infrastructure.
 - Docker, to make our app reproducible on other structure.
 
+<center>
+
+![structure](src_ftbl_home_project.jpg)
+
+</center>
+
 This system has several advantages, first of all it is cost efficient, cloud run only works when the app is triggered, 
 once the job is finished, the cloud run service stop.
 Docker allows us to containerize our app and make it easy to deploy. We use a ci/cd workflow to build and deploy our app,
